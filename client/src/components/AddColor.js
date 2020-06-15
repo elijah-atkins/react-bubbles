@@ -5,10 +5,10 @@ import axiosWithAuth from "../utils/axiosWithAuth";
 //initial state to clear form
 const initialColor = {
     color: "",
-    code: { hex: "" },
+    hex: "#000000",
   };
 
-export const AddColor = () => {
+export const AddColor = ({ updateColors }) => {
   const { push } = useHistory();
  //create state object using useState
  const [addColor, setAddColor] = useState(initialColor);
@@ -31,6 +31,11 @@ export const AddColor = () => {
       .post(`http://localhost:5000/api/colors/`, newColor)
       .then(res => {
        console.log("AddColor.js post success:", res.data);
+       updateColors(res.data)
+       setAddColor({
+           color: "",
+           hex: "#000000"
+       })
         push(`/BubblePage`);
       })
       .catch(err =>
@@ -43,27 +48,32 @@ export const AddColor = () => {
   };
   return(
         <div className="color-form">
-                  <h2>Add Color</h2>
+                  <legend>add color</legend>
       <form onSubmit={handleSubmit}>
+      <label>
+            color name:
         <input
           type="text"
           name="color"
           onChange={changeHandler}
-          placeholder="Color Name"
+          placeholder="color name"
           value={addColor.color}
-        />
-        <div className="baseline" />
+        /></label>
 
+        <div className="baseline" />
+        <label>
+            select color:
         <input
-          type="text"
+          type="color"
           name="hex"
           onChange={changeHandler}
-          placeholder="Hex Code"
+            placeholder="#000000"
          value={addColor.hex}
-        />
+        />        </label>
         <div className="baseline" />
-
-        <button className="form-submit">Add Color</button>
+        <div className="button-row">
+        <button type="submit">Add Color</button>
+</div>
       </form>
         </div>
     )

@@ -57,7 +57,8 @@ const ColorList = ({ colors, updateColors }) => {
 
   return (
     <div className="colors-wrap">
-      <p>colors</p>
+          <AddColor updateColors={updateColors}/>
+      <legend>colors</legend>
       <ul>
         {colors.map((color) => (
           <li key={color.color} onClick={() => editColor(color)}>
@@ -81,8 +82,10 @@ const ColorList = ({ colors, updateColors }) => {
         ))}
       </ul>
       {editing && (
+        <div className="color-form">
+        <legend>edit color</legend>
         <form onSubmit={saveEdit}>
-          <legend>edit color</legend>
+
           <label>
             color name:
             <input
@@ -109,10 +112,11 @@ const ColorList = ({ colors, updateColors }) => {
             <button onClick={() => setEditing(false)}>cancel</button>
           </div>
         </form>
+        </div>
       )}
-      <div className="spacer" />
+
       {/* stretch - build another form here to add a color */}
-      <AddColor />
+
     </div>
   );
 };

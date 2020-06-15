@@ -28,7 +28,6 @@ class Login extends React.Component {
       .then((res) => {
         localStorage.setItem("token", res.data.payload);
         this.props.history.push("/BubblePage");
-        console.log(res);
       })
       .catch((err) =>
         console.error("ea: Login.js: login: err.message: ", err.message)
@@ -37,7 +36,7 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="login">
         <h1>Welcome to the Bubble App!</h1>
         <form onSubmit={this.login}>
           <input
@@ -52,7 +51,9 @@ class Login extends React.Component {
             value={this.state.credentials.password}
             onChange={this.handleChange}
           />
-          <button>Log in</button>
+          <div className="button-row">
+            <button>Log in</button>
+          </div>
         </form>
       </div>
     );

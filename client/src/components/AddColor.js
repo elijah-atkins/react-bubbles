@@ -55,6 +55,7 @@ export const AddColor = ({ updateColors }) => {
         <input
           type="text"
           name="color"
+          minLength="3"
           onChange={changeHandler}
           placeholder="color name"
           value={addColor.color}

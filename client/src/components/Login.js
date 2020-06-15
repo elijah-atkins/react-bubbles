@@ -10,6 +10,7 @@ class Login extends React.Component {
       username: "",
       password: "",
     },
+    error: "",
   };
 
   handleChange = (e) => {
@@ -28,9 +29,16 @@ class Login extends React.Component {
       .then((res) => {
         localStorage.setItem("token", res.data.payload);
         this.props.history.push("/BubblePage");
+
       })
       .catch((err) =>
-        console.error("ea: Login.js: login: err.message: ", err.message)
+        this.setState({
+          credentials: {
+            username: "",
+            password: ""
+          },
+          error: err.message
+        })
       );
   };
 
@@ -55,6 +63,7 @@ class Login extends React.Component {
             <button>Log in</button>
           </div>
         </form>
+        {(this.state.error !== "") ? <p className="error">{this.state.error}</p> : null}
       </div>
     );
   }

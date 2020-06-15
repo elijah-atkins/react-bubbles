@@ -89,6 +89,7 @@ const ColorList = ({ colors, updateColors }) => {
           <label>
             color name:
             <input
+              minLength="3"
               onChange={(e) =>
                 setColorToEdit({ ...colorToEdit, color: e.target.value })
               }

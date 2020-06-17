@@ -44,6 +44,7 @@ const ColorList = ({ colors, updateColors }) => {
       .delete(`http://localhost:5000/api/colors/${id}`)
       .then((res) => {
         updateColors(colors.filter((x) => x.id !== id));
+        setEditing(false);
         push(`/BubblePage`);
       })
       .catch((err) =>
@@ -99,6 +100,7 @@ const ColorList = ({ colors, updateColors }) => {
           <label>
             hex code:
             <input
+              type="color"
               onChange={(e) =>
                 setColorToEdit({
                   ...colorToEdit,

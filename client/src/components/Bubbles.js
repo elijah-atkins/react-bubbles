@@ -4,12 +4,12 @@ import { Svg, Circle } from "@potion/element";
 import useResize from '../hooks/useResize';
 
 const Bubbles = ({ colors }) => {
-  const componentRef = useRef();
-  const { width, height } = useResize(componentRef);
+  const myRef = useRef();
+  const { width, height } = useResize(myRef);
   const [bubbleData, setBubbleData] = useState([]);
 
   useEffect(() => {
-    console.log(`Width: ${width}, Height: ${height}`)
+    //console.log(`Width: ${width}, Height: ${height}`)
     const generateBubbleData = colors.map((_, i) => ({
       value: Math.floor(Math.random() * (colors.length * 2)),
       key: `${i + 1}`
@@ -18,7 +18,7 @@ const Bubbles = ({ colors }) => {
   }, [colors, width, height]);
 
   return (
-    <div ref={componentRef} className="bubble-wrap">
+    <div ref={myRef} className="bubble-wrap">
       <legend>bubbles</legend>
       <Svg  width={width} height={height}>
         <Pack

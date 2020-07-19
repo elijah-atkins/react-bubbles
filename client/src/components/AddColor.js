@@ -28,7 +28,7 @@ export const AddColor = ({ updateColors }) => {
         code:{ hex: addColor.hex}
     }
     axiosWithAuth()
-      .post(`http://localhost:5000/api/colors/`, newColor)
+      .post(`https://eli-colors.herokuapp.com/api/colors/`, newColor)
       .then(res => {
        console.log("AddColor.js post success:", res.data);
        updateColors(res.data)

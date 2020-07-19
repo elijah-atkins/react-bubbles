@@ -9,7 +9,7 @@ const BubblePage = () => {
   // fetch your colors data from the server when the component mounts
   const fetchColors = () => {
     axiosWithAuth()
-      .get(`http://localhost:5000/api/colors/`)
+      .get(`https://eli-colors.herokuapp.com/api/colors/`)
   // set that data to the colorList state property
       .then((res) => setColorList(res.data))
       .catch((err) => console.log(err.response));

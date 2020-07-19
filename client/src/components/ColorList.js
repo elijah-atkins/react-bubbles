@@ -26,7 +26,7 @@ const ColorList = ({ colors, updateColors }) => {
     // think about where will you get the id from...
     // where is is saved right now?
     axiosWithAuth()
-      .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
+      .put(`https://eli-colors.herokuapp.com/api/colors/${colorToEdit.id}`, colorToEdit)
       .then((res) => {
         updateColors([
           ...colors.filter((x) => x.id !== colorToEdit.id),
@@ -41,7 +41,7 @@ const ColorList = ({ colors, updateColors }) => {
 
   const deleteColor = (id) => {
     axiosWithAuth()
-      .delete(`http://localhost:5000/api/colors/${id}`)
+      .delete(`https://eli-colors.herokuapp.com/api/colors/${id}`)
       .then((res) => {
         updateColors(colors.filter((x) => x.id !== id));
         setEditing(false);

@@ -1,27 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Pack } from "@potion/layout";
 import { Svg, Circle } from "@potion/element";
+import useResize from '../hooks/useResize';
 
 const Bubbles = ({ colors }) => {
+  const myRef = useRef();
+  const { width, height } = useResize(myRef);
   const [bubbleData, setBubbleData] = useState([]);
+
   useEffect(() => {
+    //console.log(`Width: ${width}, Height: ${height}`)
     const generateBubbleData = colors.map((_, i) => ({
-      value: Math.floor(Math.random() * (colors.length * 2)) + 1,
+      value: Math.floor(Math.random() * (colors.length * 2)+1),
       key: `${i + 1}`
     }));
     setBubbleData(generateBubbleData);
-  }, [colors]);
+  }, [colors, width, height]);
 
   return (
-    <div className="bubble-wrap">
-      <p>bubbles</p>
-      <Svg width={400} height={400}>
+    <div ref={myRef} className="bubble-wrap">
+      <legend>bubbles</legend>
+      <Svg  width={width} height={height}>
         <Pack
           data={{
             children: bubbleData
           }}
           sum={datum => datum.value}
-          size={[400, 400]}
+          size={[width, height]}
           includeRoot={false}
           nodeEnter={d => ({ ...d, r: 0 })}
           animate
@@ -31,6 +36,7 @@ const Bubbles = ({ colors }) => {
               .map(({ x, y, r, key }, i) => {
                 if (i < colors.length) {
                   return (
+
                     <Circle
                       key={key}
                       cx={x}
@@ -38,6 +44,7 @@ const Bubbles = ({ colors }) => {
                       r={r}
                       fill={colors[i].code.hex}
                     />
+ 
                   );
                 }
                 return null;

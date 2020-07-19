@@ -46,6 +46,8 @@ class Login extends React.Component {
     return (
       <div className="login">
         <h1>Welcome to the Bubble App!</h1>
+        <p>Username: Lambda School</p>
+        <p>Password: i<3Lambd4</p>
         <form onSubmit={this.login}>
           <input
             type="text"
